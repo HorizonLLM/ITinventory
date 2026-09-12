@@ -9,7 +9,7 @@
 import { useState } from 'react';
 import './theme/theme.css';
 import { registers } from './schema';
-import { RegisterView, Register, Overview, AuditView } from './views';
+import { Register, Overview, AuditView } from './views';
 import type { Collection } from './schema/kinds';
 
 export default App;
@@ -24,7 +24,7 @@ function App() {
       case 'overview':
         return <Overview />;
       default:
-        return <Register kind={active as Collection} />;
+        return <Register kind={active as unknown as Collection} />;
     }
   };
 

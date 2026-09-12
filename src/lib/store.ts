@@ -24,6 +24,7 @@ export interface Database {
   software: Entity[];
   knowledge: Entity[];
   audit: AuditLine[];
+  [key: string]: Entity[] | AuditLine[];
 }
 
 export type CollectionKey = keyof Omit<Database, 'audit'>;
@@ -32,8 +33,12 @@ const STORE_KEY = 'it-inventory.v2';
 const AUDIT_KEY = 'it-inventory.audit.v1';
 
 export function loadDatabase(): Database {
+  const stored = readJSON<Partial<Database>>(STORE_KEY, {});
   return {
-    ...readJSON<Partial<Database>>(STORE_KEY, {}),
+    assets: stored.assets ?? [],
+    servers: stored.servers ?? [],
+    software: stored.software ?? [],
+    knowledge: stored.knowledge ?? [],
     audit: readJSON<AuditLine[]>(AUDIT_KEY, []),
   };
 }

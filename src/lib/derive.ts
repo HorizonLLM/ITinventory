@@ -8,7 +8,8 @@
  * the whole app without rendering a browser.
  */
 
-import type { Entity, EntityState, STATE_STYLE } from '../types';
+import { STATE_STYLE } from '../types.ts';
+import type { Entity, EntityState } from '../types.ts';
 
 /** Map a record's state to its visual tone + glyph. */
 export function stateStyle(state: EntityState) {

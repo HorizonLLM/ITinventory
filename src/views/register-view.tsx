@@ -14,12 +14,10 @@ import type { RecordEntity } from '../types';
 import { Empty, Badge } from '../components/presentational';
 import { stateStyle } from '../lib/derive';
 import { formatAt } from '../lib/format';
-import type { AuditLine } from '../lib/store';
 
 interface RegisterViewProps {
   kind: Collection;
   records: RegisterEntity[];
-  audit: AuditLine[];
   onAdd: (record: RecordEntity) => void;
   onDelete: (id: string) => void;
 }
@@ -28,7 +26,7 @@ function cellClass(field: Field): string {
   return field.type === 'number' ? 'table__num' : 'table__text';
 }
 
-export function RegisterView({ kind, records, audit, onAdd, onDelete }: RegisterViewProps) {
+export function RegisterView({ kind, records, onAdd, onDelete }: RegisterViewProps) {
   const [query, setQuery] = useState('');
   const [stateFilter, setStateFilter] = useState<'all' | 'active' | 'retired' | 'pending'>('all');
   const [filterField, setFilterField] = useState<string>('all');
@@ -44,14 +42,14 @@ export function RegisterView({ kind, records, audit, onAdd, onDelete }: Register
       if (filterField === 'all') {
         return JSON.stringify(r).toLowerCase().includes(q);
       }
-      const value = (r as RecordEntity)[filterField] as string | number | undefined;
+      const value = (r as unknown as RecordEntity)[filterField] as string | number | undefined;
       return String(value ?? '').toLowerCase().includes(q);
     });
   }, [records, query, stateFilter, filterField]);
 
   // Derive a display value for a field on a record.
   const cell = (record: RegisterEntity, field: Field): React.ReactNode => {
-    const raw = (record as Record<string, unknown>)[field.key];
+    const raw = (record as unknown as Record<string, unknown>)[field.key];
     if (field.type === 'enum') {
       return <Badge tone="neutral">{String(raw ?? '—')}</Badge>;
     }

@@ -2,7 +2,7 @@
  * software.ts — the "Software" register.
  */
 
-import type { Collection } from './kinds';
+import type { Collection } from './kinds.ts';
 
 export const software: Collection = {
   key: 'software',

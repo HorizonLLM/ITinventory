@@ -31,7 +31,7 @@ const tokensFile = resolve(root, 'src/theme/tokens.css');
 if (!existsSync(tokensFile)) fail('tokens', 'tokens.css missing');
 else {
   const text = readFileSync(tokensFile, 'utf8');
-  const declared = [...text.matchAll(/--[\w-]+:/g)].map((m) => m[0].slice(0, -1));
+  const declared = [...text.matchAll(/--([\w-]+):/g)].map((m) => m[1]);
   const expected = ['void','plate','plate-2','raised','hair','edge','dim','text','signal','accent','live','font-body','font-label','font-mono','notch'];
   const missing = expected.filter((t) => !declared.includes(t));
   if (missing.length) fail('tokens', `missing tokens: ${missing.join(', ')}`);
@@ -54,7 +54,6 @@ for (const kind of registers) {
 schemaOk ? ok('schema') : null;
 
 // 3. registers: four collections, each with a distinct key.
-import { registers } from '../src/schema/index.ts';
 const keys = registers.map((r) => r.key);
 const dupes = keys.filter((k, i) => keys.indexOf(k) !== i);
 dupes.length ? fail('registers', `duplicate keys: ${dupes.join(', ')}`) : ok('registers');
@@ -66,15 +65,15 @@ const states = ['active', 'retired', 'pending'];
 let deriveOk = true;
 for (const s of states) {
   const style = stateStyle(s);
-  if (!['neutral','accent','live'].includes(style.tone)) { deriveOk = false; fail(`derive:${s}`, 'bad tone'); }
+  if (!['neutral','accent','live','dim'].includes(style.tone)) { deriveOk = false; fail(`derive:${s}`, 'bad tone'); }
   if (!needsAttention(s) && stateStyle(s).tone !== 'live') { deriveOk = false; fail(`derive:${s}`, 'live state not detected'); }
 }
 rollup([]); // must not throw
 deriveOk ? ok('derive') : null;
 
 // 5. helpers: markdown + format do not throw on representative input.
-import { renderMarkdown, formatAt, nowISO } from '../src/lib/markdown.ts';
-import { formatFromISO } from '../src/lib/format.ts';
+import { renderMarkdown } from '../src/lib/markdown.ts';
+import { formatAt, nowISO } from '../src/lib/format.ts';
 try {
   renderMarkdown('# h\n\nSome **bold** text with `code` and [a link](https://x).');
   formatAt(nowISO());

@@ -2,7 +2,7 @@
  * servers.ts — the "Servers" register.
  */
 
-import type { Collection } from './kinds';
+import type { Collection } from './kinds.ts';
 
 export const servers: Collection = {
   key: 'servers',

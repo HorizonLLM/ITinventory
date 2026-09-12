@@ -6,11 +6,11 @@
  * form, filter, and search all follow from the schema.
  */
 
-import type { Entity } from '../types';
-import { assets } from './assets';
-import { servers } from './servers';
-import { software } from './software';
-import { knowledge } from './knowledge';
+import type { Entity } from '../types.ts';
+import { assets } from './assets.ts';
+import { servers } from './servers.ts';
+import { software } from './software.ts';
+import { knowledge } from './knowledge.ts';
 
 export interface AssetRecord extends Entity {
   name: string;

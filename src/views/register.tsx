@@ -8,7 +8,8 @@
 
 import { useDatabase } from '../lib/store';
 import { registers, type RegisterEntity } from '../schema';
-import { registerView } from './register-view';
+import type { RecordEntity } from '../types';
+import { RegisterView } from './register-view';
 
 export function Register({ kind }: { kind: (typeof registers)[number] }) {
   const { db, setDatabase } = useDatabase();
@@ -30,5 +31,5 @@ export function Register({ kind }: { kind: (typeof registers)[number] }) {
     }));
   };
 
-  return <RegisterView kind={kind} records={records} audit={db.audit} onAdd={onAdd} onDelete={onDelete} />;
+  return <RegisterView kind={kind} records={records} onAdd={onAdd} onDelete={onDelete} />;
 }

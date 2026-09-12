@@ -5,7 +5,7 @@
  * The shared Register view reads this and derives table/form/filter/search.
  */
 
-import type { Collection } from './kinds';
+import type { Collection } from './kinds.ts';
 
 export const assets: Collection = {
   key: 'assets',

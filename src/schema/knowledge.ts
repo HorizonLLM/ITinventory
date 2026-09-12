@@ -2,7 +2,7 @@
  * knowledge.ts — the "Knowledge" register.
  */
 
-import type { Collection } from './kinds';
+import type { Collection } from './kinds.ts';
 
 export const knowledge: Collection = {
   key: 'knowledge',

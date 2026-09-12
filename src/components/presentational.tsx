@@ -6,10 +6,10 @@
  * active; they receive data as props.
  */
 
-import type { STATE_STYLE } from '../types';
+import type { StateStyle } from '../types';
 
 interface StatusProps {
-  style: STATE_STYLE;
+  style: StateStyle;
 }
 
 export function Status({ style }: StatusProps) {
