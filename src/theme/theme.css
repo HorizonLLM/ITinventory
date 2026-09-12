@@ -1,0 +1,16 @@
+/*
+ * theme.css — entry point that assembles the design system.
+ *
+ * Import order matters and is enforced by scripts/check-theme.mjs:
+ *   tokens.css  (the ONLY file allowed to name a literal colour)
+ *   base.css    (reset, page shell, full-bleed aesthetic overlays)
+ *   components.css (the entire visual vocabulary, in BEM, tokens only)
+ *
+ * A theme is selected at runtime by swapping the token values on `:root`.
+ * The active-look book is defined in DESIGN.md; components never know which
+ * look is active — they read semantic tokens.
+ */
+
+@import './tokens.css';
+@import './base.css';
+@import './components.css';

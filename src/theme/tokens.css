@@ -1,0 +1,45 @@
+/*
+ * tokens.css — the ONLY file in this codebase allowed to contain a literal colour.
+ *
+ * The app ships with three looks, all derived from ~/AestheticsUi:
+ *   1. Cyber Sigilism / Thorn
+ *   2. BLAME! / Level 9
+ *   3. BLAME! / Strata
+ *
+ * Every theme declares the SAME 22 tokens (see DESIGN.md). `npm run check`
+ * fails the build if one drifts or goes missing. A fourth look is a 22-line
+ * addition to `:root`, not a rewrite, because components read semantic tokens
+ * and never know which aesthetic is active.
+ */
+
+:root {
+  /* Surface — page, panel, zebra band, hover */
+  --void:   #0a0a0c;
+  --plate:  #121216;
+  --plate-2: #1a1a20;
+  --raised: #22222b;
+
+  /* Line — hairline, structural line */
+  --hair: rgba(255, 255, 255, 0.06);
+  --edge: rgba(255, 255, 255, 0.14);
+
+  /* Overlay — full-bleed dim scrim for modals/dialogs */
+  --overlay: rgba(0, 0, 0, 0.55);
+
+  /* Text — label, body, the datum your eye lands on */
+  --dim:    #6b6b76;
+  --text:   #c9c7c2;
+  --signal: #f2efe9;
+
+  /* Semantic — defined once, in lib/derive.ts, not here */
+  --accent: #c99b6a; /* needs attention */
+  --live:   #5fbfb0; /* live data only */
+
+  /* Typography — body + small-caps labels */
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-label: "Cinzel", "EB Garamond", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Geometry — nothing is rounded; corners clip at 45° */
+  --notch: 3px;
+}

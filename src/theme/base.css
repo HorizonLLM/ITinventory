@@ -1,0 +1,58 @@
+/*
+ * base.css — reset, page shell, full-bleed aesthetic overlays.
+ *
+ * Full-bleed: paint the background edge-to-edge on `html,body,app` so there is
+ * no white gutter when the content scrolls. No literal colour here — the page
+ * surface comes from `:root` in tokens.css.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Remove default focus outline; the app draws its own via :focus-visible below. */
+a,
+button,
+input,
+select,
+[tabindex] {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 1px solid var(--edge);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--signal);
+}

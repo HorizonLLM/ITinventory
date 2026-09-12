@@ -1,0 +1,8 @@
+node_modules
+dist
+*.log
+.gitignore
+
+# Recovery scaffolding (do not track)
+.git.dead/
+.recovery-backup/
